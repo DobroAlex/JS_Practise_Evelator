@@ -14,30 +14,35 @@
       <label class="currentFloor">{{this.currentFloor}}</label>
       <br>
       <label class="movementState"> {{currentStateToStr()}} </label>
+      <br>
     </div>
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(5)">
         <button type="button" class="downButton">↓</button>
       </div>
+      <br>
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(4)">
         <button type="button" class="upButton">↑</button>
         <button type="button" class="downButton">↓</button>
       </div>
+      <br>
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(3)">
         <button type="button" class="upButton">↑</button>
         <button type="button" class="downButton">↓</button>
       </div>
+      <br>
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(2)">
         <button type="button" class="upButton">↑</button>
         <button type="button" class="downButton">↓</button>
       </div>
+      <br>
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(1)">
@@ -55,7 +60,7 @@ export default {
   data () {
     return {
       elevatorObj: new Elevator(),
-      currentFloor: 4,
+      currentFloor: this.elevatorObj.floors[0],
       currentState: elevatorStates.still
     }
   },
