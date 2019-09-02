@@ -18,13 +18,10 @@ class Elevator {
     this.state = state
   }
 
-  removeCurrentFloor () { // is ought to be called then elevator arrives at floor
-    this.floors[0].shift()
+  arrivedAtFloor () {
+    this.floors.shift() // is ought to be called then elevator arrives at floor
   }
 
-  arrivedAtFloor () {
-    this.floors.shift()
-  }
   addFloor (floor, direction) {
     if (this.floor.includes(floor)) { // it's pointless to add floor if queue contains one
       return
