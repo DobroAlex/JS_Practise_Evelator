@@ -43,15 +43,15 @@ class Elevator {
         this.floors.splice(1, 0, floor) //  similar to previous in goingUp: pushing level in between two neighboors
       }
       if (floor < this.floors[this.floors.length - 1]) {
-        this.floors.push(floor)
+        this.floors.push(floor) // push it to the top (making last in queue)
       }
       partialSort(this.floors, descendingOrderComparator) // sort all floors except for current and target in descendingwi order
     } else {
-      this.floors.push(floor)
+      this.floors.push(floor) // push it to the top (making last in queue)
       if (this.state === elevatorStates.goingUp) {
-        partialSort(this.floors, ascendingOrderComparator, 2)
+        partialSort(this.floors, ascendingOrderComparator, 2) // and then sort floors in ascending order
       } else {
-        partialSort(this.floors, descendingOrderComparator, 2)
+        partialSort(this.floors, descendingOrderComparator, 2) // // and then sort floors in descending order
       }
     }
   }
