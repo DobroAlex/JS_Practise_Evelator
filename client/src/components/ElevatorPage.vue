@@ -18,6 +18,30 @@
       <div class="floor">
         <img src="../assets/closedDoor.png">
         <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(5)">
+        <button type="button" class="downButton">↓</button>
+      </div>
+      <div class="floor">
+        <img src="../assets/closedDoor.png">
+        <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(4)">
+        <button type="button" class="upButton">↑</button>
+        <button type="button" class="downButton">↓</button>
+      </div>
+      <div class="floor">
+        <img src="../assets/closedDoor.png">
+        <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(3)">
+        <button type="button" class="upButton">↑</button>
+        <button type="button" class="downButton">↓</button>
+      </div>
+      <div class="floor">
+        <img src="../assets/closedDoor.png">
+        <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(2)">
+        <button type="button" class="upButton">↑</button>
+        <button type="button" class="downButton">↓</button>
+      </div>
+      <div class="floor">
+        <img src="../assets/closedDoor.png">
+        <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(1)">
+        <button type="button" class="upButton">↑</button>
       </div>
   </div>
 </template>
@@ -25,13 +49,14 @@
 <script>
 import elevatorStates from '../classes/elevator_states_enum'
 import Elevator from '../classes/elevator'
+
 export default {
   name: 'ElevatorPage',
   data () {
     return {
       elevatorObj: new Elevator(),
-      currentFloor: 1,
-      currentState: this.elevatorObj.state
+      currentFloor: 4,
+      currentState: elevatorStates.still
     }
   },
   methods: {
@@ -57,7 +82,6 @@ export default {
       }
     },
     floorButtonClicked: function (floorNum) {
-      alert(this.elevatorObj)
       this.elevatorObj.addFloor(floorNum, this.calculateDirection(this.currentFloor, floorNum))
     }
   }
@@ -70,4 +94,5 @@ export default {
   @import '../styles/currentFloor.css';
   @import '../styles/movementState.css';
   @import '../styles/floor.css';
+  @import '../styles/UpAndDownButtons.css';
 </style>
