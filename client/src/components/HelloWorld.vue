@@ -5,8 +5,8 @@
 <script>
 export default {
   name: 'HelloWorld',
-  beforeCreate () {
-    this.$router.push({name: 'elevator'})
+  beforeMount () {
+    this.$router.push({name: 'ElevatorPage'})
   }
 }
 </script>
