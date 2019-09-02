@@ -1,7 +1,7 @@
-import { elevatorStates } from './elevator_states_enum'
-import { isBetween, partialSort, ascendingOrderComparator, descendingOrderComparator } from './utils'
+const elevatorStates = require('./elevator_states_enum')
+const utils = require('./utils')
 
-class Elevator {
+export default class Elevator {
   constructor () {
     this.state = elevatorStates.still
     this.floors = []
@@ -18,6 +18,10 @@ class Elevator {
     this.state = state
   }
 
+  set floors (floors) {
+    this.floors = floors
+  }
+  
   arrivedAtFloor () {
     this.floors.shift() // is ought to be called then elevator arrives at floor
   }
@@ -31,32 +35,28 @@ class Elevator {
       return
     }
     if (this.state === direction === elevatorStates.goingUp) { // if elevetor's going up and person wants to go up
-      if (isBetween(this.floors[0], this.floors[1], floor)) { // and if new floor is between current and target (e.x from 1 to 5 and button pressed at 3 ^)
+      if (utils.isBisBetween(this.floors[0], this.floors[1], floor)) { // and if new floor is between current and target (e.x from 1 to 5 and button pressed at 3 ^)
         this.floors.splice(1, 0, floor) // pushing new flor bettwen current and target marking new floor as new target
       }
       if ((floor > this.floors[this.floors.length - 1]) || (floor < this.floors[0])) { // if new floor as higher than last in queue or lower than first
         this.floors.push(floor) // push it to the top (making last in queue)
       }
-      partialSort(this.floors, ascendingOrderComparator, 2) // sort all floors except for current and target in ascending order
+      utils.partialSort(this.floors, utils.ascendingOrderComparator, 2) // sort all floors except for current and target in ascending order
     } else if (this.state === direction === elevatorStates.goingDown) {
-      if (isBetween(this.floors[0], this.floors[1], floor)) {
+      if (utils.isBetween(this.floors[0], this.floors[1], floor)) {
         this.floors.splice(1, 0, floor) //  similar to previous in goingUp: pushing level in between two neighboors
       }
       if (floor < this.floors[this.floors.length - 1]) {
         this.floors.push(floor) // push it to the top (making last in queue)
       }
-      partialSort(this.floors, descendingOrderComparator) // sort all floors except for current and target in descendingwi order
+      utils.partialSort(this.floors, utils.descendingOrderComparator) // sort all floors except for current and target in descendingwi order
     } else {
       this.floors.push(floor) // push it to the top (making last in queue)
       if (this.state === elevatorStates.goingUp) {
-        partialSort(this.floors, ascendingOrderComparator, 2) // and then sort floors in ascending order
+        utils.partialSort(this.floors, utils.ascendingOrderComparator, 2) // and then sort floors in ascending order
       } else {
-        partialSort(this.floors, descendingOrderComparator, 2) // // and then sort floors in descending order
+        utils.partialSort(this.floors, utils.descendingOrderComparator, 2) // // and then sort floors in descending order
       }
     }
   }
-}
-
-module.exports = {
-  Elevator
 }

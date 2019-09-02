@@ -1,32 +1,38 @@
 <template>
   <div>
     <div class="buttonsPanel">
-      <button type="button" class="button">1</button>
+      <button type="button" class="button" @click="floorButtonClicked(1)">1</button>
       <br>
-      <button type="button" class="button">2</button>
+      <button type="button" class="button" @click="floorButtonClicked(2)">2</button>
       <br>
-      <button type="button" class="button">3</button>
+      <button type="button" class="button" @click="floorButtonClicked(3)">3</button>
       <br>
-      <button type="button" class="button">4</button>
+      <button type="button" class="button" @click="floorButtonClicked(4)">4</button>
       <br>
-      <button type="button" class="button">5</button>
+      <button type="button" class="button" @click="floorButtonClicked(5)">5</button>
       <br>
-      <label class="currentFloor">{{cureentFloor}}</label>
+      <label class="currentFloor">{{this.currentFloor}}</label>
       <br>
       <label class="movementState"> {{currentStateToStr()}} </label>
     </div>
+      <div class="floor">
+        <img src="../assets/closedDoor.png">
+        <img src="../assets/openedDoor.png" v-if="matchCurrentFloorAndTartget(5)">
+      </div>
   </div>
 </template>
 
 <script>
-import {elevatorStates} from '../classes/elevator_states_enum.js'
+const elevatorStates = require('../classes/elevator_states_enum')
+const Elevator = require('../classes/elevator')
 
 export default {
   name: 'ElevatorPage',
   data () {
     return {
-      cureentFloor: 1,
-      currentState: elevatorStates.still
+      elevatorObj: new Elevator(),
+      currentFloor: 1,
+      currentState: this.elevatorObj.state
     }
   },
   methods: {
@@ -38,6 +44,22 @@ export default {
       } else {
         return '↓'
       }
+    },
+    matchCurrentFloorAndTartget (tagetFloor) {
+      return this.currentFloor === tagetFloor
+    },
+    calculateDirection (cur, tar) {
+      if (cur > tar) {
+        return elevatorStates.goingDown
+      } else if (tar > cur) {
+        return elevatorStates.goingUp
+      } else {
+        return elevatorStates.still
+      }
+    },
+    floorButtonClicked: function (floorNum) {
+      alert(this.elevatorObj)
+      this.elevatorObj.addFloor(floorNum, this.calculateDirection(this.currentFloor, floorNum))
     }
   }
 }
@@ -48,4 +70,5 @@ export default {
   @import '../styles/button.css';
   @import '../styles/currentFloor.css';
   @import '../styles/movementState.css';
+  @import '../styles/floor.css';
 </style>
