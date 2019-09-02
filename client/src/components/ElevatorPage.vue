@@ -23,9 +23,8 @@
 </template>
 
 <script>
-const elevatorStates = require('../classes/elevator_states_enum')
-const Elevator = require('../classes/elevator')
-
+import elevatorStates from '../classes/elevator_states_enum'
+import Elevator from '../classes/elevator'
 export default {
   name: 'ElevatorPage',
   data () {
