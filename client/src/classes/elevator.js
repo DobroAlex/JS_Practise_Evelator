@@ -7,27 +7,27 @@ export default class Elevator {
     this.floors = []
   }
   get state () {
-    return this.state
+    return this._state
   }
 
   get floors () {
-    return this.floors
+    return this._floors
   }
 
-  set state (state) {
-    this.state = state
+  set state (s) {
+    this._state = s
   }
 
-  set floors (floors) {
-    this.floors = floors
+  set floors (f) {
+    this._floors = f
   }
 
-  arrivedAtFloor () {
+  arrivedAtFloor = function () {
     this.floors.shift() // is ought to be called then elevator arrives at floor
   }
 
-  addFloor (floor, direction) {
-    if (this.floor.includes(floor)) { // it's pointless to add floor if queue contains one
+  addFloor = function (floor, direction) {
+    if (this.floors.includes(floor)) { // it's pointless to add floor if queue contains one
       return
     }
     if (this.state === elevatorStates.still) { // if elevator queue is empty
